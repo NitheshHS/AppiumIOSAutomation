@@ -1,14 +1,13 @@
-package cap;
+package randomTest;
 
-import io.appium.java_client.AppiumDriver;
+import cap.BaseTest;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 
-public class DatePicker extends LaunchSimulator{
+public class DatePicker extends BaseTest {
 
     @Test
     public void DatePickerTest() throws MalformedURLException {

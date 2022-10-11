@@ -1,12 +1,12 @@
 package tests;
 
 import PageFactory.HomePage;
-import cap.LaunchSimulator;
+import cap.BaseTest;
 import org.testng.annotations.Test;
 
-public class PickerViewTest extends LaunchSimulator {
+public class PickerViewTest extends BaseTest {
 
-    @Test
+   @Test
     public void verifyPickerView() throws Exception {
         new HomePage(driver)
                 .clickOnPickerView()

@@ -1,17 +1,14 @@
-package cap;
+package randomTest;
 
-import io.appium.java_client.AppiumDriver;
+import cap.BaseTest;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
 
 
-public class ScrollGesture extends LaunchSimulator{
+public class ScrollGesture extends BaseTest {
 
     @Test
     public void scrollTest() throws MalformedURLException {
