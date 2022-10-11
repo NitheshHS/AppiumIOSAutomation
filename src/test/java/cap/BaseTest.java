@@ -3,35 +3,21 @@ package cap;
 import FileUtility.JsonUtility;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.offset.ElementOption;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import randomTest.MobileGestures;
 
 import static reportUtil.ExtentReportManager.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Time;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class LaunchSimulator {
+public class BaseTest {
     public MobileGestures mobileGestures;
     public  AppiumDriver driver;
     public ExtentReports reports;
@@ -42,6 +28,8 @@ public class LaunchSimulator {
     @BeforeSuite
     public void configure(){
        reports = configureReport();
+       AppiumDriverManager.startAppiumServer();
+
     }
     @BeforeMethod
     public void launchSimulator(ITestResult result) throws MalformedURLException {
@@ -51,7 +39,7 @@ public class LaunchSimulator {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"15.5");
         capabilities.setCapability(MobileCapabilityType.UDID,"B765AD04-E166-441F-B8B5-57C8640111C4");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 12");
-        driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = new IOSDriver(AppiumDriverManager.getUrl(), capabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mobileGestures = new MobileGestures(driver);
         String testName=result.getMethod().getMethodName();
@@ -68,5 +56,6 @@ public class LaunchSimulator {
     @AfterSuite
     public void afterConfig(){
         flushReport();
+        AppiumDriverManager.stopAppiumServer();
     }
 }

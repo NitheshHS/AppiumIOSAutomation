@@ -1,12 +1,12 @@
 package tests;
 
 import PageFactory.HomePage;
-import cap.LaunchSimulator;
+import cap.BaseTest;
 import org.testng.annotations.Test;
 
-public class TextFieldTest extends LaunchSimulator {
+public class TextFieldTest extends BaseTest {
 
-    @Test
+   @Test
     public void enterValueIntoTextField(){
         new HomePage(driver)
                 .clickOnTextField()

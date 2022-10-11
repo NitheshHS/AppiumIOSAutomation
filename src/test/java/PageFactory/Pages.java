@@ -1,8 +1,7 @@
 package PageFactory;
 
 import FileUtility.JsonUtility;
-import cap.MobileGestures;
-import com.google.gson.JsonObject;
+import randomTest.MobileGestures;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
