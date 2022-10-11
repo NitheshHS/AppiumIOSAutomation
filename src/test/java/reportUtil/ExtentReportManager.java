@@ -2,8 +2,10 @@ package reportUtil;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.testng.ITestResult;
 
 import java.io.File;
 
@@ -31,6 +33,20 @@ public class ExtentReportManager {
 
     public static void flushReport(){
         reports.flush();
+    }
+
+    public static void getTestStatus(ITestResult result, String screenshotInBase64){
+        String testname = result.getMethod().getMethodName();
+        if(result.getStatus() == ITestResult.SUCCESS){
+            test.log(Status.PASS, testname);
+        }else if(result.getStatus() == ITestResult.SKIP){
+            test.log(Status.SKIP, testname);
+            info("cause: "+result.getThrowable().getMessage());
+        }else if(result.getStatus() == ITestResult.FAILURE){
+            test.log(Status.FAIL, testname);
+            info("cause: "+result.getThrowable().getMessage());
+            test.addScreenCaptureFromBase64String(screenshotInBase64);
+        }
     }
 
 }

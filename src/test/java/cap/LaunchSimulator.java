@@ -1,7 +1,9 @@
 package cap;
 
+import FileUtility.JsonUtility;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -34,6 +36,8 @@ public class LaunchSimulator {
     public  AppiumDriver driver;
     public ExtentReports reports;
     public ExtentTest test;
+    public JsonUtility json;
+
 
     @BeforeSuite
     public void configure(){
@@ -48,7 +52,6 @@ public class LaunchSimulator {
         capabilities.setCapability(MobileCapabilityType.UDID,"B765AD04-E166-441F-B8B5-57C8640111C4");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 12");
         driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        System.out.println("print success");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mobileGestures = new MobileGestures(driver);
         String testName=result.getMethod().getMethodName();
@@ -58,16 +61,7 @@ public class LaunchSimulator {
     @AfterMethod
     public void closeApp(ITestResult result){
         info("close the application");
-        if(result.getStatus() == ITestResult.SUCCESS){
-            info("Test pass");
-        }else if(result.getStatus() == ITestResult.SKIP){
-            info("Test skipped");
-            info("cause: "+result.getThrowable().getMessage());
-        }else if(result.getStatus() == ITestResult.FAILURE){
-            info("Test fail");
-            test.addScreenCaptureFromBase64String(mobileGestures.getScreenshot());
-        }
-
+        getTestStatus(result, mobileGestures.getScreenshot());
         driver.closeApp();
     }
 

@@ -20,6 +20,9 @@ public class HomePage extends Pages{
     @iOSXCUITFindBy(xpath = "//*[@name='Text Fields']")
     private WebElement textFields;
 
+    @iOSXCUITFindBy(accessibility = "Picker View")
+    private WebElement pickerView;
+
     public HomePage(AppiumDriver driver) {
         super(driver);
     }
@@ -27,5 +30,10 @@ public class HomePage extends Pages{
     public TextFieldPage clickOnTextField(){
         mobileGestures.awaitAndClick(textFields);
         return  new TextFieldPage(driver);
+    }
+
+    public PickerViewPage clickOnPickerView(){
+        mobileGestures.awaitAndClick(pickerView);
+        return new PickerViewPage(driver);
     }
 }
