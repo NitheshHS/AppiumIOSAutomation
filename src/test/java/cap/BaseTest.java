@@ -25,7 +25,6 @@ public class BaseTest {
     public void configure(){
        reports = configureReport();
        AppiumDriverManager.getInstance().startAppiumServer();
-
     }
     @BeforeMethod
     public void launchSimulator(ITestResult result) throws MalformedURLException {
@@ -33,6 +32,7 @@ public class BaseTest {
         driver = new IOSDriver(AppiumDriverManager.getInstance().getUrl(), CapabilityLib
                 .getInstance().getDeviceCapability("iPhone 12"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        mobileGestures = new MobileGestures(driver);
         String testName=result.getMethod().getMethodName();
         test = createTest(testName);
     }

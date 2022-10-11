@@ -1,5 +1,6 @@
 package PageFactory;
 
+import cap.Direction;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,9 @@ public class HomePage extends Pages{
     @iOSXCUITFindBy(accessibility = "Picker View")
     private WebElement pickerView;
 
+    @iOSXCUITFindBy(accessibility = "Web View")
+    private WebElement webView;
+
     public HomePage(AppiumDriver driver) {
         super(driver);
     }
@@ -35,5 +39,11 @@ public class HomePage extends Pages{
     public PickerViewPage clickOnPickerView(){
         mobileGestures.awaitAndClick(pickerView);
         return new PickerViewPage(driver);
+    }
+
+    public WebViewPage clickOnWebView() {
+        mobileGestures.scroll(webView);
+        mobileGestures.awaitAndClick(webView);
+        return new WebViewPage(driver);
     }
 }

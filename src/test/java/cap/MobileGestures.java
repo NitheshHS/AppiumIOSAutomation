@@ -3,6 +3,9 @@ package cap;
 import com.aventstack.extentreports.ExtentTest;
 import com.google.common.primitives.Bytes;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -82,4 +85,43 @@ public class MobileGestures {
         return driver.getScreenshotAs(OutputType.BASE64);
     }
 
+    public void scroll(WebElement element, Direction direction){
+        info("scrolling in: "+direction+" for element "+element);
+        Map<String, Object> params=new HashMap<>();
+        params.put("element", ((RemoteWebElement)element).getId());
+        params.put("toVisible",true);
+        switch (direction) {
+            case UP:
+                params.put("direction", Direction.UP.getDirection());
+                break;
+            case DOWN:
+                params.put("direction", Direction.DOWN.getDirection());
+                break;
+            default:
+                info("Element not present: "+element);
+                break;
+        }
+        driver.executeScript("mobile: scroll", params);
+    }
+
+    public void scroll(WebElement element) {
+        TouchAction touchAction = new TouchAction(driver);
+        int swipeCount = 5;
+        while (swipeCount > 0) {
+            try {
+                element.isDisplayed();
+                break;
+            } catch (Exception e) {
+                touchAction
+                        .longPress(LongPressOptions
+                                .longPressOptions()
+                                .withPosition(PointOption
+                                        .point(160, 700)))
+                        .moveTo(PointOption.point(160, 250))
+                        .release().perform();
+                swipeCount--;
+            }
+        }
+    }
 }
+
