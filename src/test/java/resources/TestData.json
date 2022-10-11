@@ -1,0 +1,13 @@
+{
+  "HOME_PAGE": {},
+
+  "PICKER_VIEW": {
+    "red_color_component": "10",
+    "blue-color_component": "250",
+    "green-color-component": "195"
+  },
+
+  "TEXT_FIELD": {
+    "text": "abc"
+  }
+}
