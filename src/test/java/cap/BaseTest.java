@@ -20,8 +20,6 @@ public class BaseTest {
     public  AppiumDriver driver;
     public ExtentReports reports;
     public ExtentTest test;
-    public JsonUtility json;
-
 
     @BeforeSuite
     public void configure(){
@@ -31,15 +29,10 @@ public class BaseTest {
     }
     @BeforeMethod
     public void launchSimulator(ITestResult result) throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app","/Users/Nithesha/Library/Developer/Xcode/DerivedData/UIKitCatalog-gccfiyrajnmwahghgvrvdlfabylh/Build/Products/Debug-iphonesimulator/UIKitCatalog.app");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,"iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"15.5");
-        capabilities.setCapability(MobileCapabilityType.UDID,"B765AD04-E166-441F-B8B5-57C8640111C4");
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 12");
-        driver = new IOSDriver(AppiumDriverManager.getInstance().getUrl(), capabilities);
+
+        driver = new IOSDriver(AppiumDriverManager.getInstance().getUrl(), CapabilityLib
+                .getInstance().getDeviceCapability("iPhone 12"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        mobileGestures = new MobileGestures(driver);
         String testName=result.getMethod().getMethodName();
         test = createTest(testName);
     }

@@ -16,6 +16,6 @@ public class Pages {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         mobileGestures = new MobileGestures(driver);
-        json = new JsonUtility().loadJsonFile();
+        json = new JsonUtility().loadJsonFile("./src/test/java/resources/TestData.json");
     }
 }

@@ -16,10 +16,10 @@ import java.util.Map;
 public class JsonUtility {
 
     public JSONObject jsonObject;
-    public JsonUtility loadJsonFile(){
+    public JsonUtility loadJsonFile(String filePath){
         try {
             jsonObject = (JSONObject) new JSONParser()
-                    .parse(new FileReader("./src/test/java/resources/TestData.json"));
+                    .parse(new FileReader(filePath));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -31,7 +31,7 @@ public class JsonUtility {
     }
 
     public String getJSONValue(String module, String data) throws Exception {
-        ExtentReportManager.info("Module name: "+module+" data: "+data);
+        //ExtentReportManager.info("Module name: "+module+" data: "+data);
         String value = "";
         if(jsonObject!=null) {
             JSONObject object = (JSONObject) jsonObject.get(module);
