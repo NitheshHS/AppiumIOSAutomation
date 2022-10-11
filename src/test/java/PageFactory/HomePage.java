@@ -22,7 +22,6 @@ public class HomePage extends Pages{
 
     public HomePage(AppiumDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public TextFieldPage clickOnTextField(){

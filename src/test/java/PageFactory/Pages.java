@@ -2,6 +2,7 @@ package PageFactory;
 
 import cap.MobileGestures;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
 public class Pages {
@@ -11,7 +12,7 @@ public class Pages {
 
     public Pages(AppiumDriver driver){
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         mobileGestures = new MobileGestures(driver);
     }
 }
