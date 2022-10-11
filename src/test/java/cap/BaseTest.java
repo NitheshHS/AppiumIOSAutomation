@@ -9,10 +9,12 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import randomTest.MobileGestures;
 
 import static reportUtil.ExtentReportManager.*;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {

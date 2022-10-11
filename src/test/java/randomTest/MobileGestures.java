@@ -1,4 +1,4 @@
-package cap;
+package randomTest;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.google.common.primitives.Bytes;
