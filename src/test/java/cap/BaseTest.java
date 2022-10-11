@@ -26,7 +26,7 @@ public class BaseTest {
     @BeforeSuite
     public void configure(){
        reports = configureReport();
-       AppiumDriverManager.startAppiumServer();
+       AppiumDriverManager.getInstance().startAppiumServer();
 
     }
     @BeforeMethod
@@ -37,7 +37,7 @@ public class BaseTest {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"15.5");
         capabilities.setCapability(MobileCapabilityType.UDID,"B765AD04-E166-441F-B8B5-57C8640111C4");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"iPhone 12");
-        driver = new IOSDriver(AppiumDriverManager.getUrl(), capabilities);
+        driver = new IOSDriver(AppiumDriverManager.getInstance().getUrl(), capabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mobileGestures = new MobileGestures(driver);
         String testName=result.getMethod().getMethodName();
@@ -54,6 +54,6 @@ public class BaseTest {
     @AfterSuite
     public void afterConfig(){
         flushReport();
-        AppiumDriverManager.stopAppiumServer();
+        AppiumDriverManager.getInstance().stopAppiumServer();
     }
 }

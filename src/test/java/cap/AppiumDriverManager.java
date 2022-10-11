@@ -11,7 +11,17 @@ import java.net.URL;
 public class AppiumDriverManager {
 
     private static AppiumDriverLocalService service;
-    private static  void setUpServer(){
+    private static AppiumDriverManager manager;
+
+    private AppiumDriverManager(){}
+
+    public static AppiumDriverManager getInstance(){
+        if(manager == null){
+            manager = new AppiumDriverManager();
+        }
+        return manager;
+    }
+    private static void setUpServer(){
          service = AppiumDriverLocalService.buildService(
                 new AppiumServiceBuilder()
                         .withAppiumJS(new File("/opt/homebrew/bin/appium"))
@@ -19,20 +29,20 @@ public class AppiumDriverManager {
                         .usingAnyFreePort());
     }
 
-    public static void startAppiumServer(){
+    public void startAppiumServer(){
         if(service==null){
             setUpServer();
             service.start();
         }
     }
 
-    public static void stopAppiumServer(){
+    public void stopAppiumServer(){
         if(service.isRunning()){
             service.stop();
         }
     }
 
-    public static URL getUrl(){
+    public URL getUrl(){
         return service.getUrl();
     }
 
